@@ -1,0 +1,77 @@
+#View processes
+
+ps:
+
+    returns processes that are running
+    --> ps
+
+    >>>the last process is the command we have just run
+    # every process has unique ID (Process ID or PID)
+    
+    * ps aux        (to see processes for all users)
+        USER:   The user who invoked the process
+        PID :   The process ID
+        %CPU:   The percent of CPU this process is using
+        %MEM:   The name of the command that started the process
+        COMMAND The nameof the command that started the process
+    
+
+#Filtering processes
+
+msfconsole:
+    
+    starts the Metasploit exploitation framework
+    --> msconsole
+
+    # to see if it is running, run 'ps aux | grep msfconsole'
+    # >>>   PostgreSQL = The database Metasploit uses
+            msfconsole
+
+top:
+
+    it displays the processes ordered by resources consuming used, starting with the largest
+    --> top
+
+    # it refreshes every 10 seconds
+    $ while is running:
+        'H' or '?'  --> pressing this will bring up a list of interactive commands
+        'Q'         --> pressing this will quit top
+
+
+#Changing Process Priroty With nice
+
+nice:
+
+    used to influence the priority of a process to the karnel = suggesting that a process should be elevated in priority; 'how nice you are to other users'
+    --> nice -n -value process
+
+    # the value for nice range from -20 to +19, with 0 being the default value --> high nice calue translates to low priority, and a low nice value translates to a high priority
+    # ! The owner of the process can lower the priority of the porvess but cannot invrease its priority (of course, the superuser or root user can arbitrarily set the nice value to whateverthey please)
+
+
+#Setting the Priority When Starting a Process
+
+nice:
+
+    --> nice -n -10 /some/process
+        #increasing the priority and allocating it more resources
+    
+    --> nice -n 10 /some/process
+        #giving the provess lower priority and allocating it less resources
+    
+renice:
+
+    re-nice sets the priority to that particular level, rather than increasing or decreading from the level at which it started
+    --> renice 20 PID
+        #giving the process lower priority and reduce its using of resources
+
+    # the value for renice takes absolute values between -20 and 19
+    # !  Only root user can renice a process to a negative value to give it higher priority, but any user can be nive and reduce priority with renice
+
+top:
+
+    to change nice value
+    $while is running:
+        'R'         --> pressing this and supplying the PID and the nice value
+
+

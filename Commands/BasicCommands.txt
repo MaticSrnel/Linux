@@ -1,0 +1,116 @@
+#SomeBasicStuff
+
+pwd:
+
+    Present working directory
+    ---> pwd
+
+whoami:
+
+    returns user's name or 'root'
+    ---> whoami
+
+cd:
+
+    change directory
+    ---> cd /directory
+
+    * cd ..     (to move one level up towards root or '/') (one set of '..' per eacr dorectory)
+    * cd /      (to moveo all the way to the root or '/')
+
+ls:
+
+    list files and directories in given or (by default) current directory
+    ---> ls */directory
+
+    * ls -l     (l = long --> long listing) (to see their permissions, owner, size and when they were last modified)
+    * ls -la    (to see hidden directories)
+
+help:
+
+    made for every command to see their use and a short description
+    ---> command --help/-h/-?           # not all commands supports all the options! But at least one they do
+
+man:
+
+    most commands and applications have manual page; provides us with more information (such as = sa. a description and synopsis of the command or application)
+    ---> man command
+
+    *q      (to wuit man page)
+
+
+#FindingStuff
+
+locate:
+
+    print everx directory path consisting of given word
+    ---> locate word
+
+    # is updated only once in a day
+
+
+#GivingPermissions
+
+chown:
+
+    change owner
+    --> chown user /directory/files
+
+chgrp:
+
+    change group
+    --> chgrp group directory/file
+
+
+#CheckingPermission
+
+    list -long
+    --> ls -l directory/file
+        >>>(1)(2) (3) (4) (5)                                       # - 1 (d)           = file type; 
+        f.e.:   drwxr-xr-x 5 root 4096 Feb 30 00:00 charset         # - 2 (rwxr-xr-x)   = The permission on the file for owner (rwx), gropus (r-x) and all other users (r-x), respectively;
+                                                                    #   -> '-' = permission had not been given;
+                                                                    #   -> Note that: sers can have permission to execute only either binaries or scripts;
+                                                                    # - 3 (5)           = The number of links
+                                                                    # - 4 (root)        = The owner of the file;
+                                                                    # - 5 (4096)        = the size of the file;
+                                                                    # - 6 (Feb 30 00:00)= when the file was created;
+                                                                    # - 7 (charset)     = The name of hte file;
+
+
+#ChangingPermission
+
+Numerical presentation:
+
+    000 0   =   ---
+    001 1   =   --x
+    010 2   =   -w-
+    011 3   =   -wx
+    100 4   =   r--
+    101 5   =   r-x
+    110 6   =   rw-
+    111 7   =   rwx
+    --> we can sum the permissions; rwx = 4 2 1 --> 4+2+1 = 7;
+    all permissions for  owner, group and all users --> 777
+    
+    chmod 777 file
+
+Symbolic presentention:     with UGO (user or owner, group and others)
+
+    chmod u/g/o -/+/=r/w/x file                                     # 'u' = user; 'g' = group; 'o' = others;
+                                                                    # '-' = removes permission; '+' = adds permission; '=' = sets permission 
+                                                                    # 'r' = read; 'w' = write; 'x' = execute
+    --> we can set multiple permission for multiple users, using a comma: '>>>chmod u+r,o+x file
+
+    SUID (user ID); SGID (group ID)
+
+    changing permissions for:
+        SUID: chmod 4numerical_presentation file; now any user can execute the file with the permissions of the owner (but those permissions don't extend beyond the use of that file)
+        SGID: chmod 2numerical_presentation file; now any user has granted permissions of the owner's group
+
+LookForFilesRootUserOrSysadmin, WithThePermission 4000
+
+    find / -user root -perm -4000
+        #look at the top filesystem with the '/' syntax for files owned by root, specified with the user 'root', and that have the SUID permission bit set (-perm -4000)
+        >>> -rwxsr-xr-x 1 root 140944 Feb 30 00:00 sudo
+            s --> instead of the x; like that kali represents that SUDO bit is set (means that anyone who runs that file, has root privilages)
+        

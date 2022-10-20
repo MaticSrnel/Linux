@@ -1,0 +1,37 @@
+The file structure of linux start with the '/' which refers to the root
+
+                                                        
+                                                        ---> /root  (Superuser's home directory)
+          ---> /boot    (Karnel image)                     
+         |                                              
+         |                                              ---> /etc   (ystem configuration files)
+         |                                              
+         |---> /home    (User directories)                 
+         |                                              
+         |                                              ---> /mnt   (General purpose mount point)
+         |                                              
+         |---> /proc    (View of internal karnel data)     
+         |                                              
+ROOT --> |                                              ---> /sys   (Karnel's view of the hardware)
+         |                                              
+         |---> /dev     (Special device files)              
+         |                                              
+         |                                              ---> /bin   (Binaries)
+         |                                              
+         |---> /sbin    (Binaries)                        
+         |                                              ---> /lib   (Libraries)
+         |
+         |                                              ---> /bin   (More binaries)
+          ---> /usr                                     ---> /sbin  (More binaries)
+                                                        ---> /lib   (More libraries)
+
+
+/root   ---> The home directory of the all-powerful root user
+/etc    ---> Generally contains the Linux configuration files - files that control when and how programs start up
+/home   ---> The user's home directory
+/mnt    ---> Where other filesystems are attached or mounted to the filesystem
+/media  ---> Where CDs and USB devices are usually attached or mounted to the filesystem
+/bin    ---> Where application binaries (the equivalent or executables in Microsoft Windows) ride
+/lib    ---> Where you'll find libraries (shared programs that are similar to Windows DLLs)
+
+Passwords are stored in /etc/shadow

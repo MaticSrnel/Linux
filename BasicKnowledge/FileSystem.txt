@@ -4,7 +4,7 @@ The file structure of linux start with the '/' which refers to the root
                                                         ---> /root  (Superuser's home directory)
           ---> /boot    (Karnel image)                     
          |                                              
-         |                                              ---> /etc   (ystem configuration files)
+         |                                              ---> /etc   (sytem configuration files)
          |                                              
          |---> /home    (User directories)                 
          |                                              
@@ -35,3 +35,15 @@ ROOT --> |                                              ---> /sys   (Karnel's vi
 /lib    ---> Where you'll find libraries (shared programs that are similar to Windows DLLs)
 
 Passwords are stored in /etc/shadow
+
+
+#Wildcards:
+
+* (represents unlimited number of character of any lenght)
+    >>> word*   -->     looks for everything, starting with word, the rest it doesn't metter
+
+? (represents one caracter)
+    >>> ?at     -->     looks for everything, ending with 'at', regardless the starting letter
+
+[](used to match the characters that will appear inside the sqare brackets)
+    >>> [c,b]at -->     looking for everything, starting with 'c', followed and ended by 'at' and with 'a', followed and ended by 'at'

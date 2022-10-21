@@ -1,3 +1,16 @@
+
+#Wildcards:
+
+* (represents unlimited number of character of any lenght)
+    >>> word*   -->     looks for everything, starting with word, the rest it doesn't metter
+
+? (represents one caracter)
+    >>> ?at     -->     looks for everything, ending with 'at', regardless the starting letter
+
+[](used to match the characters that will appear inside the sqare brackets)
+    >>> [c,b]at -->     looking for everything, starting with 'c', followed and ended by 'at' and with 'a', followed and ended by 'at'
+
+
 #SomeBasicStuff
 
 pwd:
@@ -16,7 +29,7 @@ cd:
     ---> cd /directory
 
     * cd ..     (to move one level up towards root or '/') (one set of '..' per eacr dorectory)
-    * cd /      (to moveo all the way to the root or '/')
+    * cd /      (to move all the way to the root or '/')
 
 ls:
 
@@ -47,6 +60,147 @@ locate:
     ---> locate word
 
     # is updated only once in a day
+
+whereis:
+
+    to locate binary file
+    --> whereis file_name
+    # It returns the location, source and man page
+
+which:
+
+    returns the location of the binaries in the 'PATH' variable; it looks the directories listed in the 'PATH' variable
+    --> which file_name
+
+find:
+
+    --> find directory options expression
+        #find / -type f -name apache2   ;   '/' = where to start searching; 
+                                        ;   '-type f' = type of file to search for (f=ordinary file); 
+                                        ;   '-name apache2' = name of the file;
+    # It is capable of begining the search in any designated directory and went through every subdirectory looking for a number of different parameters, including filename, date of creation or modification, the owner, the group, permissions and size
+    # ! If the file has an extension (different prefix), the search will not find a match
+
+    *find directory -type f --name file.*       # looks for every file, any extension
+
+
+#FilteringWithGrep
+
+    returns searchings containing of a keyword
+    --> any_command | grep keyword
+
+
+#FilesEditing
+
+cat:
+    
+    displays the content of the file, it can also be used for creating small files
+    --> cat file_path
+
+    * cat > file_name       # creates file
+        # Linux goes into interactive mode and now we can write into a file;
+            'CTRL-D'    -->     pressing this, we will quit interactive mode
+
+    * cat >> file_name      # allows us to append more text to a file
+        # Linux goes into interactive mode and now we can append text into a file;
+            'CTRL-D'    -->     pressing this, we will quit interactive mode
+
+    * cat > file_name       # overwrites the text, already written in the file
+        # Linux goes into interactive mode and now we can overwrite text in a file;
+            'CTRL-D'    -->     pressing this, we will quit interactive mode
+
+touch:
+
+    if the file doesn't already exsists, it creates a file by default
+    --> touch new_file
+
+mkdir:
+
+    makes new directory
+    --> mkdir new_directory
+
+cp:
+
+    creates a duplicate of the file in the new location and leaves the old one in place
+    --> touch old_file | cp old_file /path/to/new/file
+    #It doesn't matter if new file already exixts or not; if doesn't Linux will make one and copy the content; 
+    #If we don't rename the file when we copy it, the file will retain the original name by default
+
+mv:
+
+    to move a file or directory to a new location or simply to give an exsisting file a new name
+    --> mv old_filename new_filename
+
+rm:
+
+    to remove a file
+    --> rm file
+
+rmdir:
+
+    to remove a directory
+    --> rmdir directory
+    # ! removes only if the directory is empty
+
+    *rm -r directory        # removes directory and all of its content
+
+
+#TextManipulating
+
+head:
+
+    To view the beginning of a file
+    --> head -lines file                                # lines = number of lines, we want to see, counting from the first line in a document
+    #By default it displays first 10 lines of file
+
+tail:
+
+    To view the last lines of a file
+    --> tail -lines file                                # lines = number of lines, we want to see, counting from the last line in a document
+    #By deafult it displays last 10 lines of file
+
+    * tail -n +507 file | head -n 6                      # returns all lines from bottom up to line 507 | return top 6 lines of given text
+
+nl:
+
+    numerate the lines in a file when displayed
+    --> nl file
+
+sed:
+
+    Contraction of Stream Editor: To search for occurrences of a word or a text pattern and then perform some action on it;
+    --> sed s/old/new/g dst_path > finish_file
+
+        's'   -->   performs a search
+        'old' -->   the term to search for
+        'new' -->   the term to replace searched term
+        'g'   -->   replacement is performed globally ==> to change all occurrences of given phrase.
+            ! If left empty, only the first occurrence will be changed !
+            ! If instead given a number (fe 2), only the number (second) occurence will be chandes
+        'dst_file' -->   where to save the resoult, the destination file
+
+    # used to find and replace keyword or phrases
+    # ! It just copies content of the file, regarding changes into a new file, now neccessarily pre-created
+    # ! The old file stays the same
+
+
+#ViewingFile
+
+more:
+
+    To dysplay a page of a file at a time and lets you page down through it using the ENTER key
+    --> more file
+    #in the lower-left corner is shown how much of the file is shown (%)
+        'q' -->     Pressing this, you will quit
+    
+less:
+
+    The same as more + it can be filtered
+    --> less file
+    # in the bottom-left of the screen less highlite the path to the file
+        '/' -->     less  will let you search for terms in the file
+            It takes you to the first occurrence of output and highlight it
+        'n' -->     move to the next occurence of output
 
 
 #GivingPermissions

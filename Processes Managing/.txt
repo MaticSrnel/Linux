@@ -73,5 +73,67 @@ top:
     to change nice value
     $while is running:
         'R'         --> pressing this and supplying the PID and the nice value
+        'K'         --> pressing this and supplying the PID as an argument will kill the process
 
 
+#Killing a process
+
+kill:
+
+    kill a process
+    -->kill-signal PID (signal switch is optional)
+
+    * kill -1 6996  (kills a process with HUP)
+
+        SIGHUP  1   This is known as the Hangup (HUP) signal. It stops the designated process and restarts it with the same PID;
+        SIGINT  2   This is Interrupt (INT) signal. It is a weak kill signal that isn't guaranteed to work, but it works in most cases;
+        SIGQUIT 3   This is knowing as the CoreDump. It terminates the process and saves the process information in memory, and then it saves this information in the current working directory to a file named Core. (The reasons for doing this are beyond the scope of this book.);
+        SIGTERM 15  This is the Termination (TERM) signal. It is the kill command's default kill signal;
+        SIGKILL 9   This is the absolute kill signal. It forces the process to stop by sending the process's resources to a special device, /dev/null;
+
+    *killall PID-as argument        (kill a process; same as kill)
+        killall -9 name_of_the_process
+    
+
+#Running the Processes in the Background
+    Running a process withi+out needing the terminal adn returns new command prompt
+
+& (append an ampersand to the end of the command)
+
+    running process in the Background
+    --> process &
+
+
+#Moving a Process to the Foreground
+
+fg:
+
+    moves the process to the Foreground
+    --> fg PID
+
+
+#Scheduling processes
+
+at:
+
+    schedule an execution of a command or set of commands in the future
+    --> at execution_time 
+    it is a daemon - a background process - useful for scheduling a job to run once at some point in the future
+
+        at 7.:20pm              Scheduled to run at 7:20 pm on the current day
+        at 1:20pm June 25       Scheduled to run at 7:20 pm on June 25
+        at noon                 Scheduled to run at noon on the current day
+        at noon June 25         Scheduled to run at noon on June 25
+        at tomottow             Scheduled to run tomorrow
+        at now + 20 minutes     Scheduled to run in 20 minutes from the current time
+        at now + 10 hours       Scheduled to run in 10 hours from the current time
+        at now + 5 days         Scheduled to run in five days from the current date
+        at now * 3 weeks        Scheduled to run in three weeks from the current time
+        at 7:20pm 06/25/2019    Scheduled to run at 7:20 pm on June 25, 2019
+
+    # When running at command,at goes into interactive mode and you are greeted withan 'an>' promps. Here we can enter the command we want to execute at the specifies time
+    
+
+crond:
+
+    more suited for schedilung tasks to occur every day, week, or month

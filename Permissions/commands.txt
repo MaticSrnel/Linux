@@ -1,0 +1,99 @@
+#GivingPermissions
+
+    permissions:
+        'r'     --->    permission to read
+        'w'     --->    permission to write
+        'x'     --->    permission to execute
+
+chown:
+
+    change owner
+    --> chown user /directory/files
+
+chgrp:
+
+    change group
+    --> chgrp group directory/file
+
+
+#CheckingPermission
+
+    list -long
+    --> ls -l directory/file
+        >>>(1)(2) (3) (4) (5)                                       # - 1 (d)           = file type; 
+        f.e.:   drwxr-xr-x 5 root 4096 Feb 30 00:00 charset         # - 2 (rwxr-xr-x)   = The permission on the file for owner (rwx), gropus (r-x) and all other users (r-x), respectively;
+                                                                    #   -> '-' = permission had not been given;
+                                                                    #   -> Note that: sers can have permission to execute only either binaries or scripts;
+                                                                    # - 3 (5)           = The number of links
+                                                                    # - 4 (root)        = The owner of the file;
+                                                                    # - 5 (4096)        = the size of the file;
+                                                                    # - 6 (Feb 30 00:00)= when the file was created;
+                                                                    # - 7 (charset)     = The name of the file;
+
+
+#ChangingPermission
+
+Numerical presentation:
+
+    000 0   =   ---
+    001 1   =   --x
+    010 2   =   -w-
+    011 3   =   -wx
+    100 4   =   r--
+    101 5   =   r-x
+    110 6   =   rw-
+    111 7   =   rwx
+    --> we can sum the permissions; rwx = 4 2 1 --> 4+2+1 = 7;
+    all permissions for  owner, group and all users --> 777
+    
+    chmod 777 file --> gives all permission to all thw owner, user, group, others
+
+Setting more secure default permissions with masks
+
+    Linux automatically assigns base permissions - usually 666 for files and 777 for directory
+    Changing default permissions allocated to files and directories created by each user with the umask (or unmask) method; It represents the permissions you want to remove from the base permissions on a file or directory to make them more secure
+    Unmask is three-digit number corresponding to the three permissions digits but the unmask number is subtracted from the permissions number to give the new permissions status
+
+    NewFiles    NewDirectories      
+     666            777             Linux base permissions
+    -022           -022             Unmask
+     644            755             Resulting permissions       ==>     the owner has both read and write permissions, and the group and all other users have only read permission
+    
+    In Kali, as with most Debian systems, the unmask is preconfigured to 022, meaning Kali default is 644 for files and 755 for direcroties.
+
+    Each user can set a personal default umask value for thhe files and directories in their personal .profile file.
+    To see the current value when logged on as the user:
+    --> umask
+    To change the umask value for users, edit the file /home/username/.profile: add fe 'mask 007' to set it so only the user and members of the user's group have permissions
+
+Symbolic presentention:     with UGO (user or owner, group and others)
+
+    chmod u/g/o -/+/=r/w/x file                                     # 'u' = user; 'g' = group; 'o' = others;
+                                                                    # '-' = removes permission; '+' = adds permission; '=' = sets permission 
+                                                                    # 'r' = read; 'w' = write; 'x' = execute
+    --> we can set multiple permission for multiple users, using a comma: '>>>chmod u+r,o+x file
+
+    SUID (user ID); SGID (group ID)
+
+    changing temporary permissions on a file:
+        SUID: chmod 4numerical_presentation file (enter 4 before regular permission); now any user can execute the file with the permissions of the owner (but those permissions don't extend beyond the use of that file)
+            fe chmod 4644 filename (4 and permission 644)
+        SGID: chmod 2numerical_presentation file (enter 2 before regular permission); now any user has granted permissions of the owner's group
+            fe chmod 2644 filename (2 and permission 644)
+
+Sticky bit:
+
+    It is a permission bit set on a directory to allow a user to delete or rename files within that directory
+
+Privilege escalation:
+
+    Whereby a regular user gains root or sysadmin privilages and the associated permissions
+    1. To exploit (set) SUID bit on a program to allow that program access to files with root privilages
+
+    LookForFilesRootUserOrSysadmin, WithThePermission 4000
+
+        To see which files has SUID bit set
+        find / -user root -perm -4000
+            #look at the top filesystem with the '/' syntax for files owned by root, specified with the user 'root', and that have the SUID permission bit set (-perm -4000)
+            >>> -rwxsr-xr-x 1 root 140944 Feb 30 00:00 sudo
+                s --> instead of the x; like that kali represents that SUID bit is set (means that anyone who runs that file, has root privilages)

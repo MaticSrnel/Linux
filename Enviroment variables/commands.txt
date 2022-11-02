@@ -1,0 +1,98 @@
+There are two types of variables:
+
+Shell Variables:
+
+    Those are typically listed in lowercase and are only valid in the shell they are set in
+
+Enviroment Variables:
+
+    Those are system-wide variables built into the system and interface that control the way the system looks, acts, and 'feels' to the user, and they are inherited by any child shells or peocesses
+    When changing them, the change only occurs in that particular enviroment; When closing the enviroment (fe shell) the variable gets back it's default value
+
+
+Variables:
+
+    Are simply strings in key-value pairs. Each pair looks like 'KEY=value'.
+    Where there are multiple values, they will look like 'KEY=value1:value1'.
+    ! Spaces in values NEEDS TO BE contained in QUESTION MARKS !
+    The enviroment in Kali Linux is bash shell.
+    Each user, including root, has a default set of enviroment variables that determine how the system looks, acts, and feels. Those variables can be changes by its user
+    Enviroment variables are always uppercase (HOME, PATH, SHELL, ...)
+
+
+#Seeing Variables
+
+echo:
+
+    echo the value of the variable on the shell
+    --> echo $VARIABLE
+
+env:
+
+    To see your default variables
+    --> env
+
+set:
+
+    To see all enviroment variables, including shell variables, local variables and functions such as any user-defines variables adn commands aliases that re unique to your system
+    --> set (| more) (| grep KEYWORD)
+
+        fe: HISTSIZE variable contains the value of the number of commands to store (the system will store) in the history file
+
+#Changind Variables
+
+    KEY=new_value
+    Now the variable is changed
+
+fe: we want to change the HISTSIZE variable, so we don't leave any traces on the target system
+# The default value is 1000 (the system will store the last 1000 commands you will execute)
+    >>>HISTSIZE=0
+
+
+#Making Variable Value Changes Permanent
+
+export:
+
+    Export the new value from your current enviroment (fe the bash shell) to the rest of the system, making it available in every enviroment until you change and export it again
+    # It isn't bad idea to save the content of a variable to a text file before you modify it.
+    fe: we want to change the PS1 variable, ehich controls the information you display in the prompt:
+        *1.1 store it into and create a file at the same time
+            --> echo $HISTSIZE > ~/valueofHISTSIZE.txt
+        *1.2 store all the variables and create a file at the same time
+            --> echo #HISTSIZE > ~/ValueOfALLon,25.10.2022.txt
+        2.  make the value of the variable permanent
+            --> export VARIABLE
+        
+
+#Changint the Shell Prompt
+
+    PS1 variable has a set of placeholders for information you want to display in the prompt:
+        \u  :   the name of the current user
+        \h  :   the hostname
+        \w  :   the base name of the current working directory
+        fe -->  PS1="World's Best Hacker: \w #"     :       on the place of '\w' the current directory will be displayed
+    
+
+#Changing the PATH
+
+    PATH variable controls the directories where on your system your shell will look for commands you enter (such as cd, ls and echo); if the right path isn't given, than shell will return 'command not found'
+    More commands are located in the sbin or bin subdirectory (/usr/local/sbin, /usr/local/bin)
+    Each path is separated by a colon (:)
+
+    To assigns the original PATH cariable plus new_path
+    --> PATH=$PATH:/new_path
+    ! Be careful not to add too many paths in the variable, because the search could last longer
+
+
+#Creating a User-Define variable
+
+You can create your own custom, user-defined variables in Linux by simply assiging a value to a nre variable that you name
+--> MYNEWVARIABLE='value'
+All rules are the same as for any other variables
+
+
+#Deleting a User-Define Variable
+
+You can delete you own custom, user-defined variables in Linux
+--> unset MYNEWVARIABLE
+# If called, Linux will return blank line

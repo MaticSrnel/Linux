@@ -1,0 +1,10 @@
+Packages available on GitHub
+
+#Downloading the Bluediving (a Bluetooth hacking and pentesting suite)
+
+    Cloning a package
+    --> git clone <PackageGitHubURL>
+    * --> git clone https://www.github.com/balle/bluediving.git
+    # git clone copies all data and files from that location into your system
+
+    Checking if the repository is successfully copied --> ls -l

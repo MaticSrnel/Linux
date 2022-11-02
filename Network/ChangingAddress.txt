@@ -1,0 +1,80 @@
+#Changing IP address
+
+    Reassigning IP of an interface
+    --> ifconfig <interface> <IPAddress>
+
+
+#Changing NetMask Address and Broadcast Address
+
+    To change Network mask and broadcast address of an interface
+    --> ifconfig <interface> <IP1> <netmask> <IP2> <broadcast> <IP3>
+
+
+#Change MAC Address (or HWaddr)
+
+    1.  Take down the interface     :       >>> ifconfig <interface> down
+    2.  Change Mac address          :       >>> ifconfig <interface> hw ether <NewMAC>  ;   'hw': hardware, 'ether': ethernet
+    3.  Bring the interface bback up:       >>> ifconfig <interface> up
+
+
+#Assigning new IP Address from the DHCP Server
+
+    DHCP:   Dynamic Host Configuration Protocol server that runs a daemon; a process that assigns IP addresses to all the systems on the subnet and keeps log files of which IP address is allocated to which machine at any one time
+    --> to connect to the internet from LAN you must have a DHCP-assigned IP.
+
+    1.  Request New IP Address from DHCP:
+        --> dhclient <interface>    
+        #It sends DHCPOFFER from the DHCP Server and confirms the IP assignment to the DHCP server with a dhcp request
+
+
+#Manipulating the Domain Name System
+
+    Used to translate domain names to IP Addresses
+    It is the service that translates a domain name like hackers-arise.com to the appropriate ip address
+
+dig:
+
+    offers a way to gather DNS information abouth a target domain
+    --> dig <doman_name> option
+
+    *dig hackers-arise.com ns   :   'ns' - short for nameserver
+        #The answer will be stored in ANSWER SECTION
+    *dig hackers-arise.com mx   :   'mx' - short for mail exchange server
+        #The answer will be stored in AUTHORITY SECTION
+    
+    The most common Linux DNS server is Brekely Interned Name Domain (BIND) --> somtimes Kali users will refer to DNS as BIND
+
+
+#Changing DNS Server
+
+text_editor /etc/resolv.conf:
+
+    opening /etc/resolv.conf with text editor (fe Leafpad)
+    --> leafpad /etc/resolv.conf
+
+    # 'nameserver <IP>'     :       IP of the nameserver
+
+    To specify nameserver: add a line in the file: 'nameserver <IP>'
+    fe--> nameserver 8.8.8.8
+
+
+#Mapping Your Own IP Address
+
+text_editor /etc/hosts:
+
+    Hosts file performs domein name - IP Address Translation
+    Can be used to specify your own IP address - domain name mapping = you can determine which IP address your browser goes to when you enter www.url.com into the browser, rather than let DNS server decide
+
+    opening /etc/hosts with text editor (fe Leafpad)
+    --> leafpad /etc/hosts
+
+    # '127.0.0.1'       :       mapping for your localhost
+    # '127.0.1.1'       :       your system hostname
+
+    To add any IP address mapped to any domain you'd like: add a line to a file: '<IP> <URL>'
+    fe--> 129.168.181.131 bankofamerica.com
+    # ! Press TAB and not the SpaceBar between IP address and the domain key
+
+dnsspoof and Ettercap !!!
+snort !
+    

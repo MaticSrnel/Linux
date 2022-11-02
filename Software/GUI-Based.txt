@@ -1,0 +1,7 @@
+Newer versions of Kali no longer include a GUI-based software installation Tool
+
+#Installing GUI-Based System
+
+    # Synapting and Gdebi are one of the two most common GUI-Based installatin tool
+    --> apt-get install synaptic
+    # Start it: Settings > Synaptic Package Manager --> search for desired package (Search Tab) (fe snort) --> check the box next to snort > Apply Tab

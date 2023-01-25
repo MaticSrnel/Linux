@@ -2,4 +2,3 @@ nmap is used to probe a system to see whether it is connected to the netwoek and
 
 nmap <type of scan> <target IP> <optionally, target port>
     -p : designates the port you want to scan for
-    allalaalsfkgndbsk

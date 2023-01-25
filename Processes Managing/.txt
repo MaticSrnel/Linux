@@ -13,7 +13,7 @@ ps:
         PID :   The process ID
         %CPU:   The percent of CPU this process is using
         %MEM:   The name of the command that started the process
-        COMMAND The nameof the command that started the process
+        COMMAND The name of the command that started the process
     
 
 #Filtering processes
@@ -45,7 +45,7 @@ nice:
     used to influence the priority of a process to the karnel = suggesting that a process should be elevated in priority; 'how nice you are to other users'
     --> nice -n -value process
 
-    # the value for nice range from -20 to +19, with 0 being the default value --> high nice calue translates to low priority, and a low nice value translates to a high priority
+    # the value for nice range from -20 to +19, with 0 being the default value --> high nice value translates to low priority, and a low nice value translates to a high priority
     # ! The owner of the process can lower the priority of the porvess but cannot invrease its priority (of course, the superuser or root user can arbitrarily set the nice value to whateverthey please)
 
 

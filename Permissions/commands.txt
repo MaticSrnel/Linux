@@ -22,7 +22,7 @@ chgrp:
     --> ls -l directory/file
         >>>(1)(2) (3) (4) (5)                                       # - 1 (d)           = file type; 
         f.e.:   drwxr-xr-x 5 root 4096 Feb 30 00:00 charset         # - 2 (rwxr-xr-x)   = The permission on the file for owner (rwx), gropus (r-x) and all other users (r-x), respectively;
-                                                                    #   -> '-' = permission had not been given;
+                                                                    #   -> '-'      : the permission had not been given;
                                                                     #   -> Note that: sers can have permission to execute only either binaries or scripts;
                                                                     # - 3 (5)           = The number of links
                                                                     # - 4 (root)        = The owner of the file;
@@ -61,7 +61,7 @@ Setting more secure default permissions with masks
     
     In Kali, as with most Debian systems, the unmask is preconfigured to 022, meaning Kali default is 644 for files and 755 for direcroties.
 
-    Each user can set a personal default umask value for thhe files and directories in their personal .profile file.
+    Each user can set a personal default umask value for the files and directories in their personal .profile file.
     To see the current value when logged on as the user:
     --> umask
     To change the umask value for users, edit the file /home/username/.profile: add fe 'mask 007' to set it so only the user and members of the user's group have permissions

@@ -1,0 +1,69 @@
+Every device (cdrom, cpu, ...) in Linux is represented by its own file within /dev directory
+
+/dev
+
+    dev = device
+
+    devices sda1, sda2, sda3, sdb, sdb1 - hard drives and partitions and a USB drive and its partitions
+        * when system has more than one hard drive, Linux simply names them serially by incrementing the last letter in alphabetic order. f.e. sda, sdb, ...
+        * when a device is seperated into more partitions, Linux adds a number after its name (f.e. sda1, sda1, sda3, ...)
+
+
+    floppy drives - fd0
+    hard drives - hda; sometimes on some intefaces as sda
+    DVD drives - sr0
+
+    one of filesystems that Kali uses:
+    ext2, ext3 and ext4 (extend)
+
+
+    crw------- 1 root root 10,175 May 16 12:44 agpgart
+        * 'c' / 'd' represent the two ways that devices transfer data in and out
+        * 'c' - character
+            These devices are known as character devices = external devices that interact with the system by sending and receiving data character by character, such as mice, keyboard, ...
+        * 'b' - block
+            These devices are known as clock devices = devices that communicate in blocks of data (multiple bytes at a time) and include devices like hard drives and DVD drives
+            These devices require higher-speed data throughput and therefore send and receive data in blocks (many characters or bytes at a time)
+
+#commands
+
+    fdisk: wiew the partitions and see how much capacity is available in each
+        fdisk -l
+            * 'l' : list all the partitions of all drivers
+            # Some devices will be marked as HPFS/NTFS/exFAT which are not native to Linux System but rather to macOS and Widnows system
+
+    lsblk : list block devices; lists some basic information about each device listed in /dev
+        lsblk -l: without '-s' it lists devices like a tree
+        ! does NOT require root privilages to run
+
+#Mounting and UnMonting
+
+    Mount point - The point in the directory tree where devices are attached
+    Most modern OSs automount storage devices when they're attached, meaning the new flash drive or hard disk is automatically attached to the filesystem.
+    The two main points in Linux are /mnt (for internam hard drives) and /media (external hard drives, f.e. USB devices such as USB flash drives and USB hard drives)
+
+    #commands
+
+        mount <HardDriveDirectory> <Directory> : to mount a drive manually in order to acces its content;
+            !! mounting to an already full directory, it makes all the subdirectories that already exsists invisible and unavailable.
+
+            f.e.    mount /dev/sdb1 /mnt       :        Mount the new hard drive sdb1 at the /mnt directory
+                    mount /deb+v/sdc1 /media   :        Mount the flash drive sdc1 to the /media directory
+    
+    !!! The filesystems that are mounted on a system are kept in a file at /etc/fstab (short for filesystem table), which is read by the system at every bootup
+
+
+        Eject = Unmount
+
+        umount <HardDriveDirectory> : To unmount a second hard drive by entering the umount command followed by the file entry of the device in teh /dev directory
+            f.e.    umount /dev/sdb1
+         ! You cannot unmount a device that is busy (= The system is writing or reading from the device)
+
+
+# Monitoring filesystem
+
+    df      : (for disk free) provide with basic information on any hard disks or mounted devices such as CD, DVD and flash drives, including how much space is being used and how much is available
+    fsck    : (filesystem check) checks for filesystem for errors and repairs damage, if possible, or else puts the bad area into a bad block table to mark it as bad
+        ! to run the check, the device ust be umounted (umout)
+        '-p': to have fsck automatically repair any problems with the device
+    

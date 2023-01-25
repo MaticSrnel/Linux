@@ -14,7 +14,7 @@
 
     1.  Take down the interface     :       >>> ifconfig <interface> down
     2.  Change Mac address          :       >>> ifconfig <interface> hw ether <NewMAC>  ;   'hw': hardware, 'ether': ethernet
-    3.  Bring the interface bback up:       >>> ifconfig <interface> up
+    3.  Bring the interface back up :       >>> ifconfig <interface> up
 
 
 #Assigning new IP Address from the DHCP Server
@@ -35,7 +35,7 @@
 dig:
 
     offers a way to gather DNS information abouth a target domain
-    --> dig <doman_name> option
+    --> dig <doman_name> <option>
 
     *dig hackers-arise.com ns   :   'ns' - short for nameserver
         #The answer will be stored in ANSWER SECTION
@@ -49,7 +49,7 @@ dig:
 
 text_editor /etc/resolv.conf:
 
-    opening /etc/resolv.conf with text editor (fe Leafpad)
+    opening /etc/resolv.conf with text editor (f.e. Leafpad)
     --> leafpad /etc/resolv.conf
 
     # 'nameserver <IP>'     :       IP of the nameserver
@@ -62,17 +62,17 @@ text_editor /etc/resolv.conf:
 
 text_editor /etc/hosts:
 
-    Hosts file performs domein name - IP Address Translation
+    Hosts file performs domain name - IP Address Translation
     Can be used to specify your own IP address - domain name mapping = you can determine which IP address your browser goes to when you enter www.url.com into the browser, rather than let DNS server decide
 
-    opening /etc/hosts with text editor (fe Leafpad)
+    opening /etc/hosts with text editor (f.e. Leafpad)
     --> leafpad /etc/hosts
 
     # '127.0.0.1'       :       mapping for your localhost
     # '127.0.1.1'       :       your system hostname
 
     To add any IP address mapped to any domain you'd like: add a line to a file: '<IP> <URL>'
-    fe--> 129.168.181.131 bankofamerica.com
+    f.e. --> 129.168.181.131 bankofamerica.com
     # ! Press TAB and not the SpaceBar between IP address and the domain key
 
 dnsspoof and Ettercap !!!

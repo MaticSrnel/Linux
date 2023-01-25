@@ -176,7 +176,7 @@ sed:
         'new' -->   the term to replace searched term
         'g'   -->   replacement is performed globally ==> to change all occurrences of given phrase.
             ! If left empty, only the first occurrence will be changed !
-            ! If instead given a number (fe 2), only the number (second) occurence will be chandes
+            ! If instead given a number (f.e. 2), only the number (second) occurence will be chandes
         'dst_file' -->   where to save the resoult, the destination file
 
     # used to find and replace keyword or phrases

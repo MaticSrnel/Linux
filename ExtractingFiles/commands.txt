@@ -1,0 +1,51 @@
+#ArchivingFiles
+
+    tar:    tape achive     # To send some files. IT DOES NOT COMPRESS
+        --> creates a single file from many files, which is then referred as a archive, tar file or tarball
+
+        tar -cvf <DestinationArchivedFile> <filename1> <filename2> <...>
+            * 'c' - create
+            * 'v' - verbose (optional) - lists the files that tar is dealing with
+            * 'f' - "write to following "write to the following file"
+
+        tar -tvf <DestinationArchivedFile>
+         --> to display archived files without extracting them
+         * 't' - list switch
+
+        tar -xvf <DestinationArchivedFile>
+            --> to extract file
+            * 'x' - extraxt switch
+            # Because of -v it is going to be displayed on screen!
+    
+#CompressingFiles
+
+    gzip        :  .tar.gz or .tgz      #InBetween
+
+        gzip FileName.*                 #FileName.tar   --> FileName.tar.gz
+        gunzip FileName.*               #FileName.tar.z --> FileName.tar
+
+    bzip2       :  .tar.bz2             #TheSlowest-TheBest
+
+        bzip2 FileName.*                #FileName.tar     --> FileName.tar.bz2
+        bunzip2 FileName.*              #FileName.tar.bz2 --> FileName.tar
+
+    compress    :  .tar.z               #TheFastest-TheWorse
+
+        compress FileName.*             #FileName.tar   --> FileName.tar.Z
+        uncompress FileName.*           #FileName.tar.Z --> FileName.tar
+
+#Bit-By-Bit or Phisical Copies of storage devices
+
+    dd if=<AbsoluterPathOfInputFile> of=<AbsolutePathOfOutputFile>:     Bit-By-Bit copy of the file, a filesystem or entire hard Drive; even deleted files
+        # Deleted fiels will not be copied with the most logical copying utilies, f.e. cp
+        !!! It is very slow
+        #/dev/sdb --> FlaskDrive
+    
+    @options
+    noerror - continues to copy even if error are ecountered
+    bd      - allows you to determine the bloacksize (number of bytes written/read per block) of the data being coppied.
+        By default is set to 512 bytes. To speed up, typically this would be set to the sector size of the device, most often 4KB
+        To speed up: dd if=<AbsoluterPathOfInputFile> of=<AbsolutePathOfOutputFile> bs=4069 conv:noerror
+
+
+    
